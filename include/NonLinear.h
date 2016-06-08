@@ -18,7 +18,7 @@ private:
 
 		//Variables vital to the force.
 		double kT;
-		double temp;
+		double wellDepth;
 		int ljNum;
 		double charge;
 		double salt;
