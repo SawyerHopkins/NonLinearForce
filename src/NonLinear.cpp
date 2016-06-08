@@ -32,6 +32,7 @@ NonLinear::NonLinear(config* cfg)
 	name = "Lennard Jones";
 
 	kT = cfg->getParam<double>("kT", 10.0);
+	temp = cfg->getParam<double>("temp", 1.0);
 
 	//Get the radius
 	radius = cfg->getParam<double>("radius",0.5);
@@ -124,7 +125,7 @@ type3<double> NonLinear::iterCells(int index, int hash, double* sortedParticles,
 					}
 
 					//Update
-					double fNet = -kT*attract;
+					double fNet = -kT*temp*attract;
 
 					//Positive is attractive; Negative repulsive.
 					//fNet = -fNet;
@@ -190,7 +191,7 @@ type3<double> NonLinear::postIterCells(int index, int hash, double* sortedPartic
 					fsalt -= vx / sqrt(1.0 + vxSquared);
 					fsalt -= vxSquaredInv / sqrt(1.0 + vxSquaredInv);
 					fsalt *= gradient[i];
-					fsalt *= 3.14*kT*salt*d*d;
+					fsalt *= 3.14*temp*salt*d*d;
 
 					//-------------------------------------
 					//------NORMALIZATION AND SETTING------
